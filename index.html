@@ -4,9 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Caseirinhos Premium — Fature R$2.000 a R$2.500 por semana</title>
+
+<!-- PERFORMANCE: Pré-carrega a imagem hero (maior impacto no LCP) -->
+<link rel="preload" as="image" href="images/bolo-lotus.webp" type="image/webp">
+<link rel="preload" as="image" href="images/bolo-pistache.webp" type="image/webp">
+<link rel="preload" as="image" href="images/bolo-coco.webp" type="image/webp">
+
+<!-- PERFORMANCE: Google Fonts com display=swap para não bloquear renderização -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
+
 <style>
   :root {
     --white: #FFFFFF;
@@ -193,6 +202,8 @@
     box-shadow: 0 24px 64px rgba(0,0,0,0.5);
     border: 1px solid rgba(184,151,58,0.30);
     background: rgba(255,255,255,0.04);
+    cursor: pointer;
+    position: relative;
   }
   .recipe-video { width: 100%; display: block; }
   .video-placeholder {
@@ -209,6 +220,23 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 1.5rem; color: var(--gold-light);
   }
+  /* Overlay de play antes do usuário clicar */
+  .video-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.35);
+    transition: opacity 0.3s ease;
+  }
+  .video-play-overlay .play-icon {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(184,151,58,0.85);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; color: var(--black);
+  }
+  .video-play-overlay.hidden { opacity: 0; pointer-events: none; }
 
   /* ── COURSE ITEMS (módulos) ── */
   .course-items {
@@ -1201,33 +1229,36 @@
     .story-stat-number { font-size: 2rem; }
   }
 </style>
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wnc01riecc");
-</script>
-<!-- End Microsoft Clarity -->
 
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1519539383210484');
-fbq('track', 'PageView');
+<!-- Microsoft Clarity: carregado com defer para não bloquear renderização -->
+<script defer>
+  window.addEventListener('load', function() {
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wnc01riecc");
+  });
+</script>
+
+<!-- Meta Pixel: carregado com defer para não bloquear renderização -->
+<script defer>
+  window.addEventListener('load', function() {
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1519539383210484');
+    fbq('track', 'PageView');
+  });
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1519539383210484&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -1240,21 +1271,44 @@ src="https://www.facebook.com/tr?id=1519539383210484&ev=PageView&noscript=1"
 <section class="hero">
   <div class="container">
     <div class="hero-photos reveal">
+
+      <!-- OTIMIZAÇÃO: WebP com fallback JPEG + dimensões definidas -->
+      <!-- Imagem 1 (menor, sem lazy pois está acima do fold) -->
       <div class="hero-photo-wrap">
-        <img src="images/bolo-lotus.jpg" alt="Caseirinho Lotus"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <picture>
+          <source srcset="images/bolo-lotus.webp" type="image/webp">
+          <img src="images/bolo-lotus.jpg" alt="Caseirinho Lotus"
+               width="155" height="155"
+               fetchpriority="high"
+               onerror="this.parentElement.style.display='none';this.closest('.hero-photo-wrap').querySelector('.photo-fallback').style.display='flex'">
+        </picture>
         <div class="photo-fallback" style="display:none"><span>🎂</span><span>Bolo Lotus</span></div>
       </div>
+
+      <!-- Imagem 2 (central, maior destaque) -->
       <div class="hero-photo-wrap">
-        <img src="images/bolo-pistache.jpg" alt="Caseirinho Pistache"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <picture>
+          <source srcset="images/bolo-pistache.webp" type="image/webp">
+          <img src="images/bolo-pistache.jpg" alt="Caseirinho Pistache"
+               width="200" height="200"
+               fetchpriority="high"
+               onerror="this.parentElement.style.display='none';this.closest('.hero-photo-wrap').querySelector('.photo-fallback').style.display='flex'">
+        </picture>
         <div class="photo-fallback" style="display:none"><span>🎂</span><span>Pistache</span></div>
       </div>
+
+      <!-- Imagem 3 -->
       <div class="hero-photo-wrap">
-        <img src="images/bolo-coco.jpg" alt="Caseirinho Rosas de Coco"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <picture>
+          <source srcset="images/bolo-coco.webp" type="image/webp">
+          <img src="images/bolo-coco.jpg" alt="Caseirinho Rosas de Coco"
+               width="155" height="155"
+               fetchpriority="high"
+               onerror="this.parentElement.style.display='none';this.closest('.hero-photo-wrap').querySelector('.photo-fallback').style.display='flex'">
+        </picture>
         <div class="photo-fallback" style="display:none"><span>🎂</span><span>Rosas de Coco</span></div>
       </div>
+
     </div>
 
     <h1 class="reveal">
@@ -1331,10 +1385,18 @@ src="https://www.facebook.com/tr?id=1519539383210484&ev=PageView&noscript=1"
 <section class="story-section">
   <div class="container">
     <div class="story-grid">
+
+      <!-- OTIMIZAÇÃO: lazy loading na foto da professora (abaixo do fold) -->
       <div class="story-photo-wrap reveal">
-        <img src="images/professora.jpg" alt="Professora Ramayana Alves"
-             onerror="this.outerHTML='<div class=\'story-photo-placeholder\'><span>👩‍🍳</span><span>Adicione sua foto aqui</span></div>'">
+        <picture>
+          <source srcset="images/professora.webp" type="image/webp">
+          <img src="images/professora.jpg" alt="Professora Ramayana Alves"
+               width="480" height="600"
+               loading="lazy"
+               onerror="this.closest('.story-photo-wrap').outerHTML='<div class=\'story-photo-placeholder\'><span>👩‍🍳</span><span>Adicione sua foto aqui</span></div>'">
+        </picture>
       </div>
+
       <div class="story-text">
         <span class="section-label label-light reveal">Quem vai te ensinar</span>
         <h2 class="section-title section-title-dark reveal">Sua professora de confeitaria</h2>
@@ -1377,14 +1439,22 @@ src="https://www.facebook.com/tr?id=1519539383210484&ev=PageView&noscript=1"
     <h2 class="section-title section-title-light reveal">Você vai aprender o segredo da <em>massa amanteigada</em></h2>
     <div class="divider reveal"></div>
 
-    <div class="video-wrapper reveal">
-      <!-- Coloque o arquivo receita.mp4 na pasta images/ para o vídeo aparecer -->
-      <video class="recipe-video" autoplay loop muted playsinline id="recipe-video">
+    <!-- OTIMIZAÇÃO: vídeo com preload="none" + poster + play ao clicar -->
+    <div class="video-wrapper reveal" id="video-wrapper">
+      <video class="recipe-video" id="recipe-video"
+             preload="none"
+             poster="images/receita-thumb.jpg"
+             loop muted playsinline
+             style="display:block">
         <source src="images/receita.mp4" type="video/mp4">
       </video>
+      <!-- Overlay de play (some ao clicar) -->
+      <div class="video-play-overlay" id="video-overlay">
+        <div class="play-icon">▶</div>
+      </div>
       <div class="video-placeholder" id="video-placeholder" style="display:none">
         <div class="play-icon">▶</div>
-        <p>Carregando vídeo…</p>
+        <p>Clique para carregar o vídeo</p>
       </div>
     </div>
 
@@ -1483,10 +1553,17 @@ src="https://www.facebook.com/tr?id=1519539383210484&ev=PageView&noscript=1"
     <div class="divider reveal"></div>
 
     <div class="course-items">
+
+      <!-- OTIMIZAÇÃO: lazy loading + WebP + dimensões nas imagens dos módulos -->
       <div class="course-item reveal">
         <div class="course-item-img">
-          <img src="images/modulos.png" alt="Aulas gravadas do curso"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <picture>
+            <source srcset="images/modulos.webp" type="image/webp">
+            <img src="images/modulos.png" alt="Aulas gravadas do curso"
+                 width="600" height="338"
+                 loading="lazy"
+                 onerror="this.parentElement.style.display='none';this.closest('.course-item-img').querySelector('.img-fallback').style.display='flex'">
+          </picture>
           <div class="img-fallback" style="display:none"><span>🎬</span><span>Aulas gravadas</span></div>
         </div>
         <div class="course-item-text">
@@ -1494,10 +1571,16 @@ src="https://www.facebook.com/tr?id=1519539383210484&ev=PageView&noscript=1"
           <p>Aprenda no seu ritmo com vídeo aulas completas ensinando cada detalhe das massas base que fazem toda a diferença no resultado final.</p>
         </div>
       </div>
+
       <div class="course-item reveal">
         <div class="course-item-img">
-          <img src="images/ebooks.png" alt="E-books com receitas exclusivas"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <picture>
+            <source srcset="images/ebooks.webp" type="image/webp">
+            <img src="images/ebooks.png" alt="E-books com receitas exclusivas"
+                 width="600" height="338"
+                 loading="lazy"
+                 onerror="this.parentElement.style.display='none';this.closest('.course-item-img').querySelector('.img-fallback').style.display='flex'">
+          </picture>
           <div class="img-fallback" style="display:none"><span>📚</span><span>E-books exclusivos</span></div>
         </div>
         <div class="course-item-text">
@@ -1505,6 +1588,7 @@ src="https://www.facebook.com/tr?id=1519539383210484&ev=PageView&noscript=1"
           <p>Receituário completo com todas as receitas dos caseirinhos premium — ingredientes, quantidades, modo de preparo e dicas de apresentação.</p>
         </div>
       </div>
+
     </div>
 
     <div class="recipes-block reveal">
@@ -1711,19 +1795,37 @@ src="https://www.facebook.com/tr?id=1519539383210484&ev=PageView&noscript=1"
 </footer>
 
 <script>
-  // ── VIDEO PLACEHOLDER ──
+  // ── VÍDEO: só carrega ao clicar (economiza dados mobile) ──
   (function () {
-    var vid = document.getElementById('recipe-video');
-    var ph  = document.getElementById('video-placeholder');
-    if (!vid || !ph) return;
+    var wrapper = document.getElementById('video-wrapper');
+    var vid     = document.getElementById('recipe-video');
+    var overlay = document.getElementById('video-overlay');
+    var ph      = document.getElementById('video-placeholder');
+    if (!wrapper || !vid) return;
+
     var src = vid.querySelector('source');
+
+    // Verifica se o arquivo existe
     if (src) {
-      src.addEventListener('error', function () {
+      var testVid = document.createElement('video');
+      testVid.preload = 'none';
+      var testSrc = document.createElement('source');
+      testSrc.src = src.src;
+      testVid.appendChild(testSrc);
+      testSrc.addEventListener('error', function () {
         vid.style.display = 'none';
+        if (overlay) overlay.style.display = 'none';
         ph.style.display = 'flex';
       });
     }
-    vid.load();
+
+    // Ao clicar no overlay, inicia o vídeo
+    if (overlay) {
+      overlay.addEventListener('click', function () {
+        overlay.classList.add('hidden');
+        vid.play();
+      });
+    }
   })();
 
   // ── TIMER (10 min, localStorage, congela em 00:00) ──
